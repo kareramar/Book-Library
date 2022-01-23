@@ -8,4 +8,6 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use('/', api);
 
-app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+const server=app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+
+module.exports = server;
