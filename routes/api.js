@@ -1,20 +1,20 @@
 const router = require('express').Router();
 const bookModel = require('../model/book_model');
 
-router.get('/getBookList', async function (req, res) {
+router.get('/getBookList', async (req, res)=> {
    const bookList = await bookModel.find();
    console.log(bookList);
    res.send(bookList);
 });
 
-router.get('/getBookList/:id', async function (req, res) {
+router.get('/getBookList/:id', async (req, res)=> {
     const { id } = req.params;
     const book = await bookModel.findOne({title : id});
     if(!book) return res.send("Book Not Found");
     res.send(book);
 });
 
-router.post('/books', async function (req, res) {
+router.post('/books', async  (req, res)=> {
     const title= req.body.title;
     const subtitle = req.body.subtitle;
     const isbn=req.body.isbn;
@@ -29,10 +29,11 @@ router.post('/books', async function (req, res) {
     data.save();
 
     res.send("Book Added Successfully.....");
+    
 });
 
 
-router.put('/books/:id', async function (req, res) {
+router.put('/books/:id', async(req, res)=> {
     const { id } = req.params;
     const {
         subtitle,
@@ -44,8 +45,6 @@ router.put('/books/:id', async function (req, res) {
 
     const bookExist = await bookModel.findOne({title : id});
     if (!bookExist) return res.send('Book Do Not exist');
-  
-    if (bookExist) return res.send('Book already exist');
 
     const updateField = (val, prev) => !val ? prev : val;
 
@@ -62,7 +61,7 @@ router.put('/books/:id', async function (req, res) {
     res.status(200).send("Book Updated Successfully.....");
 });
 
-router.delete('/books/:id', async function (req, res) {
+router.delete('/books/:id', async  (req, res)=> {
     const { id } = req.params;
 
     const bookExist = await bookModel.findOne({title : id});
