@@ -56,9 +56,9 @@ router.put('/books/:id', async(req, res)=> {
         publisher: updateField(publisher, bookExist.publisher),
         author: updateField(author, bookExist.author)
     };
-    await bookModel.updateOne({title: id},{$set :{isbn: updatedBook.isbn,description: updatedBook.description,subtitle: updatedBook.subtitle,publisher: updatedBook.publisher,author: updatedBook.author}})
-    
-    res.status(200).send("Book Updated Successfully.....");
+        await bookModel.updateOne({title: id},{$set :{isbn: updatedBook.isbn,description: updatedBook.description,subtitle: updatedBook.subtitle,publisher: updatedBook.publisher,author: updatedBook.author}})
+       
+        res.status(200).send("Book Updated Successfully.....");  
 });
 
 router.delete('/books/:id', async  (req, res)=> {
